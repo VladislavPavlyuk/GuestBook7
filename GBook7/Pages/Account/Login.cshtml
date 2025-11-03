@@ -1,0 +1,40 @@
+@page
+@model GBook7.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="mb-3">
+                <label asp-for="LoginViewModel.Login" class="form-label"></label>
+                <input asp-for="LoginViewModel.Login" class="form-control" />
+                <span asp-validation-for="LoginViewModel.Login" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LoginViewModel.Password" class="form-label"></label>
+                <input asp-for="LoginViewModel.Password" class="form-control" />
+                <span asp-validation-for="LoginViewModel.Password" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Login" class="btn btn-primary" />
+                <a asp-page="/Index" class="btn btn-link">Enter as Guest</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("/Pages/Shared/_ValidationScriptsPartial.cshtml");
+    }
+}

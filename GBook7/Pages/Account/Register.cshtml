@@ -1,0 +1,45 @@
+@page
+@model GBook7.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Registration</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="mb-3">
+                <label asp-for="RegisterViewModel.Login" class="form-label"></label>
+                <input asp-for="RegisterViewModel.Login" class="form-control" />
+                <span asp-validation-for="RegisterViewModel.Login" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RegisterViewModel.Password" class="form-label"></label>
+                <input asp-for="RegisterViewModel.Password" class="form-control" />
+                <span asp-validation-for="RegisterViewModel.Password" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RegisterViewModel.PasswordConfirm" class="form-label"></label>
+                <input asp-for="RegisterViewModel.PasswordConfirm" class="form-control" />
+                <span asp-validation-for="RegisterViewModel.PasswordConfirm" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("/Pages/Shared/_ValidationScriptsPartial.cshtml");
+    }
+}

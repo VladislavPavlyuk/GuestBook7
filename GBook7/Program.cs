@@ -4,28 +4,25 @@ using GBook.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Все сессии работают поверх объекта IDistributedCache, и 
-// ASP.NET Core предоставляет встроенную реализацию IDistributedCache
-builder.Services.AddDistributedMemoryCache();// добавляем IDistributedMemoryCache
-builder.Services.AddSession();  // Добавляем сервисы сессии
+// All sessions work on top of IDistributedCache object, and
+// ASP.NET Core provides built-in implementation of IDistributedCache
+builder.Services.AddDistributedMemoryCache(); // add IDistributedMemoryCache
+builder.Services.AddSession(); // Add session services
 
-// Получаем строку подключения из файла конфигурации
+// Get connection string from configuration file
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// добавляем контекст ApplicationContext в качестве сервиса в приложение
+// add ApplicationContext as a service to the application
 builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
 
-// Добавляем сервисы MVC
-builder.Services.AddControllersWithViews();
+// Add Razor Pages services
+builder.Services.AddRazorPages();
 builder.Services.AddScoped<IRepository, GBookRepository>();
 
-
 var app = builder.Build();
-app.UseSession();   // Добавляем middleware-компонент для работы с сессиями
-app.UseStaticFiles(); // обрабатывает запросы к файлам в папке wwwroot
+app.UseSession(); // Add middleware component for working with sessions
+app.UseStaticFiles(); // handles requests to files in wwwroot folder
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

@@ -8,6 +8,8 @@ namespace GBook.Repository
         Task<List<Messages>> GetMessageList();
         Task Create(Messages mes);
         Task Save();
-
+        Task<Users?> GetUserByLoginAsync(string login);
+        Task<bool> UserExistsAsync(string login);
+        Task CreateUserAsync(Users user);
     }
 }

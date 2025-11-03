@@ -1,0 +1,34 @@
+@page
+@model GBook7.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create Message";
+}
+
+<h1>Create Message</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="mb-3">
+                <label asp-for="Message.Message" class="form-label"></label>
+                <textarea asp-for="Message.Message" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Message.Message" class="text-danger field-validation-error"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("/Pages/Shared/_ValidationScriptsPartial.cshtml");
+    }
+}

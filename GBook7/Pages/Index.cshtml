@@ -1,0 +1,36 @@
+@page
+@model GBook7.Pages.IndexModel
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @if (Model.IsAuthenticated)
+    {
+        <a asp-page="/Create" class="btn btn-primary">Send Message</a>
+    }
+</p>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date and Time</th>
+                <th>User</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Messages.AsEnumerable().Reverse())
+            {
+                <tr>
+                    <td>@item.MessageDateTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                    <td>@item.User?.Login</td>
+                    <td>@item.Message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
